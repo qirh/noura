@@ -69,11 +69,16 @@
       .profile-img {
         width: 100%;
       }
+      body.ar .intro-container {
+        flex-direction: column;
+      }
     }
 
     /* When Arabic is enabled, flip the visual order so the image remains on the right */
-    body.ar .intro-container {
-      flex-direction: row-reverse;
+    @media (min-width: 721px) {
+      body.ar .intro-container {
+        flex-direction: row-reverse;
+      }
     }
 
     .threads {
