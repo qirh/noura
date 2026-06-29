@@ -25,8 +25,70 @@ h3 {
 	margin-top: 1.2rem;
 	margin-bottom: 0.6rem;
 }
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:40px 0;
+}
+
+.tab-btn{
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#d7bcc6;
+    color:#5f192c;
+    font-family:"Quicksand",sans-serif;
+    font-size:16px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.tab-btn:hover{
+    background:#c99daf;
+}
+
+.tab-btn.active{
+    background:#7d3751;
+    color:white;
+}
+
+.tab-content{
+    display:none;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+.project{
+    background:rgba(255,255,255,.75);
+    padding:25px;
+    margin:20px 0;
+    border-radius:18px;
+}
   </style>
 </head>
+<script>
+
+function showTab(tabName){
+
+    document.querySelectorAll(".tab-content").forEach(tab=>{
+        tab.classList.remove("active");
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    document.getElementById(tabName).classList.add("active");
+
+    event.target.classList.add("active");
+}
+
+document.getElementById("not-started").classList.add("active");
+
+</script>
 <body>
   <div class="container">
     <a class="back" href="index.html">← back home</a>
@@ -38,7 +100,7 @@ I started knitting in 2025, and it has been an exciting hobby that ghas pushed m
 I experiment alot with different patterns and techniques, and even attempt to self- draft some of my own creations!!
 This is just the beginning of my knitting journey, and I look forward to sharing more of my projects ♡
     </h2>
-    
+
 <div class="tabs">
     <button class="tab-btn active" onclick="showTab('not-started')">
         Not Started
@@ -51,6 +113,7 @@ This is just the beginning of my knitting journey, and I look forward to sharing
     <button class="tab-btn" onclick="showTab('finished')">
         Finished
     </button>
+    
 </div>
     <h3>
       paragraph 1
