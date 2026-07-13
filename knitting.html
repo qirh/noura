@@ -9,6 +9,9 @@
     body { margin:0; font-family:"Quicksand", sans-serif; color:#333;
       background-image: url("knitting background.png");
       background-size: cover; background-position:center; background-attachment: fixed; }
+    .lang { text-align:center; margin:24px 0 8px; }
+    .lang button { background:none; border:none; cursor:pointer; font-size:0.95rem; padding:0 6px; color:#6b3f4b; font-family:"Quicksand", sans-serif; }
+    body.ar { direction: rtl; text-align: right; }
     .container { max-width:880px; margin: 60px auto; padding: 24px; }
     a.back { color:#6b3f4b; text-decoration:none; font-weight:600 }
      h1 { 
@@ -163,7 +166,11 @@ document.getElementById("not-started").classList.add("active");
 
 </script>
 <body>
-  <div class="container">
+  <div class="lang">
+    <button onclick="setEnglish()">English</button> |
+    <button onclick="setArabic()">عربي</button>
+  </div>
+  <div class="container" id="content">
     <a class="back" href="index.html">← back home</a>
     <h1>My Knitting</h1>
     
@@ -219,5 +226,25 @@ This is just the beginning of my knitting journey, and I look forward to sharing
 
 
   </div>
+<script>
+  const englishContent = document.getElementById("content").innerHTML;
+
+  function setArabic() {
+    document.body.classList.add("ar");
+    document.documentElement.lang = "ar";
+    document.getElementById("content").innerHTML = `
+      <a class="back" href="index.html">← العودة للرئيسية</a>
+      <h1>التريكو ♡</h1>
+      <h2>بدأتُ التريكو في عام 2025، وأصبح هواية ممتعة تُساعدني على الإبداع والصبر.</h2>
+      <p>أُجرب أنماطًا وتقنيات مختلفة، وأحيانًا أُحاول تصميم بعض الأعمال بنفسي.</p>
+    `;
+  }
+
+  function setEnglish() {
+    document.body.classList.remove("ar");
+    document.documentElement.lang = "en";
+    document.getElementById("content").innerHTML = englishContent;
+  }
+</script>
 </body>
 </html>
