@@ -70,6 +70,26 @@ body {
 	background-repeat: no-repeat;
 }
 
+.lang {
+  text-align: center;
+  margin: 16px 0 8px;
+}
+
+.lang button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0 6px;
+  color: #6b3f4b;
+  font-family: "Quicksand", sans-serif;
+}
+
+body.ar {
+  direction: rtl;
+  text-align: right;
+}
+
 .page {
 	min-height: 150vh;
 	padding: 60px 24px;
@@ -134,7 +154,12 @@ p {
 
 <div class="page">
 
-<div class="content">
+<div class="lang">
+  <button onclick="setEnglish()">English</button> |
+  <button onclick="setArabic()">عربي</button>
+</div>
+
+<div class="content" id="content">
 
 
 <a class="back" href="index.html">
@@ -454,6 +479,27 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
 
 </div>
 
+
+<script>
+  const englishContent = document.getElementById("content").innerHTML;
+
+  function setArabic() {
+    document.body.classList.add("ar");
+    document.documentElement.lang = "ar";
+    document.getElementById("content").innerHTML = `
+      <a class="back" href="index.html">← العودة للرئيسية</a>
+      <h1>أفكاري ♡</h1>
+      <p>هذه الصفحة نسخة عربية مختصرة من أفكاري واهتماماتي.</p>
+      <p>أحبّ التعلم، الفن، والكتابة، وأشارك هنا ما يثير فضولي.</p>
+    `;
+  }
+
+  function setEnglish() {
+    document.body.classList.remove("ar");
+    document.documentElement.lang = "en";
+    document.getElementById("content").innerHTML = englishContent;
+  }
+</script>
 
 </body>
 
