@@ -181,6 +181,31 @@ text-shadow:
 
 
 
+
+.lang {
+  text-align: center;
+  margin: 24px 0 8px;
+}
+
+.lang button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0 6px;
+  color: #6b3f4b;
+  font-family: "Quicksand", sans-serif;
+}
+
+body.ar {
+  direction: rtl;
+  text-align: right;
+}
+
+body.ar .back {
+  display: inline-block;
+}
+
 </style>
 
 
@@ -194,8 +219,12 @@ text-shadow:
 
 <div class="page">
 
+<div class="lang">
+  <button onclick="setEnglish()">English</button> |
+  <button onclick="setArabic()">عربي</button>
+</div>
 
-<div class="content">
+<div class="content" id="content">
 
 
 
@@ -302,6 +331,29 @@ For now, I'm just grateful to be here and excited to see what the next two month
 </div>
 
 
+
+<script>
+  const englishContent = document.getElementById("content").innerHTML;
+
+  function setArabic() {
+    document.body.classList.add("ar");
+    document.documentElement.lang = "ar";
+    document.getElementById("content").innerHTML = `
+      <a class="back" href="index.html">← العودة للرئيسية</a>
+      <h1>الحياة ♡</h1>
+      <div class="entry">
+        <p>هذه الصفحة مخصصة لمشاركة أفكاري وتجارب حياتي وملاحظاتي.</p>
+        <p>أحبّ مشاركة اللحظات الصغيرة التي تُضفي معنى على الحياة، من السفر إلى العمل والمشاريع.</p>
+      </div>
+    `;
+  }
+
+  function setEnglish() {
+    document.body.classList.remove("ar");
+    document.documentElement.lang = "en";
+    document.getElementById("content").innerHTML = englishContent;
+  }
+</script>
 
 </body>
 
