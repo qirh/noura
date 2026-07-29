@@ -146,7 +146,6 @@ p {
 	.entry img { width: 100%; max-width: 100%; margin: 32px auto; }
 }
 
-/* Bilingual blocks: show .en by default, .ar when body.ar is set */
 .en { display: block; }
 .ar { display: none; direction: rtl; text-align: right; }
 body.ar .en { display: none; }
@@ -192,6 +191,7 @@ More coming soon ♡
 
 
 <div class="entry">
+  <div class="en">
 
 <h2>Christopher Nolan's The Odyssey</h2>
 
@@ -227,9 +227,14 @@ I still think it's worth watching. It held my attention the entire time, and vis
 I wish more directors would either stay faithful to what made the original story resonate for thousands of years or give themselves permission to write something entirely new. I think I'd respect a completely original story inspired by *The Odyssey* more than an adaptation that borrows the names and plot but leaves behind what made me love the poem in the first place.
 </p>
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 <div class="entry">
+  <div class="en">
 
 <h2>My Fish</h2>
 
@@ -247,6 +252,10 @@ For now, I’m happy here, watching my fish and shrimp live their tiny lives. Bu
 </p>
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 
@@ -254,6 +263,7 @@ For now, I’m happy here, watching my fish and shrimp live their tiny lives. Bu
 
 
 <div class="entry">
+  <div class="en">
 
 <h2>Blank Street Coffee</h2>
 
@@ -270,9 +280,14 @@ What’s interesting is how perfectly this fits into late-stage capitalist logic
 And honestly, it works. That’s the uncomfortable part. The company expanded insanely quickly, something traditional coffee shops could never do without sacrificing margins or burning out staff. By automating labor and centralizing decision-making, Blank Street unlocked the kind of growth investors love. It’s capitalism doing what capitalism does best: turning culture into a system and scaling it.
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 <div class="entry">
+  <div class="en">
 
 <h2>Maps!!!</h2>
 
@@ -292,6 +307,10 @@ I don’t have a bigger point than that. I just really love maps.
 </p>
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 
@@ -301,6 +320,7 @@ I don’t have a bigger point than that. I just really love maps.
 
 
 <div class="entry">
+  <div class="en">
 
 
 <h2>Sylvia Plath's Fig Tree</h2>
@@ -335,10 +355,15 @@ Especially if it means I was brave enough to pick one.
 </p>
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 
 <div class="entry">
+  <div class="en">
 
 <h2>Building Boston</h2>
 
@@ -373,6 +398,10 @@ I don’t think Boston hides its past. It embeds it. In filled-in water, in rero
 </p>
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 
@@ -381,6 +410,7 @@ I don’t think Boston hides its past. It embeds it. In filled-in water, in rero
 
 
 <div class="entry">
+  <div class="en">
 
 
 <h2>The Kiss by Gustav Klimt</h2>
@@ -399,6 +429,10 @@ I got my nails inspired by it. I wanted to carry that moment with me, a little p
 There’s something about sitting with a piece of art like this, just noticing it, letting it be overwhelming and delicate at the same time.
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 
@@ -408,6 +442,7 @@ There’s something about sitting with a piece of art like this, just noticing i
 
 
 <div class="entry">
+  <div class="en">
 
 
 <h2>Mary Shelley</h2>
@@ -437,6 +472,10 @@ I think that’s why I keep coming back to Mary Shelley. Her life reminds me tha
 </p>
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
 
 
@@ -447,6 +486,7 @@ I think that’s why I keep coming back to Mary Shelley. Her life reminds me tha
 
 
 <div class="entry">
+  <div class="en">
 
 
 <h2>Four Eye Butterfly Fish</h2>
@@ -467,6 +507,10 @@ I love them so much
 </p>
 
 
+  </div>
+  <div class="ar" dir="rtl" lang="ar" hidden>
+    <!-- Arabic version goes here -->
+  </div>
 </div>
   <div class="ar" dir="rtl" lang="ar" hidden>
     <h2>سمكة الفراشة ذات الأربع عيون</h2>
@@ -498,6 +542,7 @@ I love them so much
 
 
 <div class="entry">
+  <div class="en">
 
 
 <h2>Perception of Women in Greek Mythology</h2>
@@ -522,6 +567,8 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
 </p>
 
 
+  </div>
+  
 </div>
 
 
@@ -532,81 +579,15 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
 
 
 <script>
-  function updateLinks(lang) {
-    document.querySelectorAll('a[href]').forEach((link) => {
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('http') || href.startsWith('#')) return;
-      try {
-        const url = new URL(href, window.location.href);
-        if (lang === 'ar') {
-          url.searchParams.set('lang', 'ar');
-        } else {
-          url.searchParams.delete('lang');
-        }
-        link.setAttribute('href', `${url.pathname}${url.search}`);
-      } catch (e) {
-        // ignore malformed URLs
-      }
-    });
-  }
-
-  // Wrap existing entry content into .en and append an empty .ar block for translations
-  function ensureBilingualStructure() {
-    document.querySelectorAll('.entry').forEach((entry) => {
-      if (entry.querySelector('.en')) return; // already wrapped
-
-      const en = document.createElement('div');
-      en.className = 'en';
-
-      // Move all current children into the .en wrapper
-      while (entry.firstChild) {
-        en.appendChild(entry.firstChild);
-      }
-
-      entry.appendChild(en);
-
-      const ar = document.createElement('div');
-      ar.className = 'ar';
-      ar.setAttribute('dir', 'rtl');
-      ar.setAttribute('lang', 'ar');
-      ar.hidden = true;
-      ar.innerHTML = '<!-- Arabic translation goes here -->';
-      entry.appendChild(ar);
-    });
-    // If an .ar block is placed immediately after an entry, move it into that entry
-    document.querySelectorAll('.entry').forEach((entry) => {
-      const next = entry.nextElementSibling;
-      if (next && next.classList && next.classList.contains('ar')) {
-        entry.appendChild(next);
-      }
-    });
-  }
-
   function setArabic() {
     document.body.classList.add('ar');
     document.documentElement.lang = 'ar';
-    history.replaceState(null, '', '?lang=ar');
-    updateLinks('ar');
   }
 
   function setEnglish() {
     document.body.classList.remove('ar');
     document.documentElement.lang = 'en';
-    history.replaceState(null, '', window.location.pathname);
-    updateLinks('en');
   }
-
-  // Initialize based on ?lang=ar
-  (function() {
-    ensureBilingualStructure();
-
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('lang') === 'ar') {
-      setArabic();
-    } else {
-      updateLinks('en');
-    }
-  })();
 </script>
 
 </body>
