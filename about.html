@@ -147,9 +147,12 @@ p {
 }
 
 .en { display: block; }
+.page-header.ar { display: none; }
 div.ar { display: none; direction: rtl; text-align: right; }
 body.ar .en { display: none; }
+body.ar .page-header.ar { display: block; }
 body.ar div.ar { display: block; }
+body.ar .entry { display: none; }
 </style>
 </head>
 
@@ -172,22 +175,29 @@ body.ar div.ar { display: block; }
 </a>
 
 
-<h1>Noura's Thoughts ♡</h1>
+<div class="page-header en">
+  <h1>Noura's Thoughts ♡</h1>
 
+  <p>
+    This page is a bit of a cacophony of my thoughts and interests. There’s no specific theme, just things I like ♡
+  </p>
 
-<p>
-This page is a bit of a cacophony of my thoughts and interests. There’s no specific theme, just things I like ♡
-</p>
+  <p>
+    More coming soon ♡
+  </p>
+</div>
 
+<div class="page-header ar">
+  <h1>أفكاري ♡</h1>
 
-</p>
+  <p>
+    هذه الصفحة مجموعة من أفكاري واهتماماتي. لا يوجد موضوع محدد، فقط أشياء أحبها ♡
+  </p>
 
-
-<p>
-More coming soon ♡
-</p>
-
-
+  <p>
+    المزيد قادم قريبًا ♡
+  </p>
+</div>
 
 
 <div class="entry">
