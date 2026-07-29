@@ -145,6 +145,12 @@ p {
 	.content { padding: 28px 16px; width: 94%; }
 	.entry img { width: 100%; max-width: 100%; margin: 32px auto; }
 }
+
+/* Bilingual blocks: show .en by default, .ar when body.ar is set */
+.en { display: block; }
+.ar { display: none; direction: rtl; text-align: right; }
+body.ar .en { display: none; }
+body.ar .ar { display: block; }
 </style>
 </head>
 
@@ -482,6 +488,7 @@ I love them so much
 
 أحبهم مرة.</p>
   </div>
+  
 </div>
 
 
@@ -525,35 +532,53 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
 
 
 <script>
-  const englishContent = document.getElementById("content").innerHTML;
-
-  function setArabic() {
-    document.body.classList.add("ar");
-    document.documentElement.lang = "ar";
-    document.getElementById("content").innerHTML = `
-      <a class="back" href="index.html">← العودة للرئيسية</a>
-      <h1>مقالات نورة ♡</h1>
-      <p>أحبّ التعلم، الفن، والكتابة، وأشارك هنا ما يثير فضولي.</p>
-
-    `;
-  }
-
-  function setEnglish() {
-    document.body.classList.remove("ar");
-    document.documentElement.lang = "en";
-    document.getElementById("content").innerHTML = englishContent;
-  }
   function updateLinks(lang) {
     document.querySelectorAll('a[href]').forEach((link) => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('http') || href.startsWith('#')) return;
-      const url = new URL(href, window.location.href);
-      if (lang === 'ar') {
-        url.searchParams.set('lang', 'ar');
-      } else {
-        url.searchParams.delete('lang');
+      try {
+        const url = new URL(href, window.location.href);
+        if (lang === 'ar') {
+          url.searchParams.set('lang', 'ar');
+        } else {
+          url.searchParams.delete('lang');
+        }
+        link.setAttribute('href', `${url.pathname}${url.search}`);
+      } catch (e) {
+        // ignore malformed URLs
       }
-      link.setAttribute('href', `${url.pathname}${url.search}`);
+    });
+  }
+
+  // Wrap existing entry content into .en and append an empty .ar block for translations
+  function ensureBilingualStructure() {
+    document.querySelectorAll('.entry').forEach((entry) => {
+      if (entry.querySelector('.en')) return; // already wrapped
+
+      const en = document.createElement('div');
+      en.className = 'en';
+
+      // Move all current children into the .en wrapper
+      while (entry.firstChild) {
+        en.appendChild(entry.firstChild);
+      }
+
+      entry.appendChild(en);
+
+      const ar = document.createElement('div');
+      ar.className = 'ar';
+      ar.setAttribute('dir', 'rtl');
+      ar.setAttribute('lang', 'ar');
+      ar.hidden = true;
+      ar.innerHTML = '<!-- Arabic translation goes here -->';
+      entry.appendChild(ar);
+    });
+    // If an .ar block is placed immediately after an entry, move it into that entry
+    document.querySelectorAll('.entry').forEach((entry) => {
+      const next = entry.nextElementSibling;
+      if (next && next.classList && next.classList.contains('ar')) {
+        entry.appendChild(next);
+      }
     });
   }
 
@@ -561,12 +586,6 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
     document.body.classList.add('ar');
     document.documentElement.lang = 'ar';
     history.replaceState(null, '', '?lang=ar');
-    document.getElementById('content').innerHTML = `
-      <a class="back" href="index.html">← العودة للرئيسية</a>
-      <h1>أفكاري ♡</h1>
-      <p>هذه الصفحة نسخة عربية مختصرة من أفكاري واهتماماتي.</p>
-      <p>أحبّ التعلم، الفن، والكتابة، وأشارك هنا ما يثير فضولي.</p>
-    `;
     updateLinks('ar');
   }
 
@@ -574,17 +593,20 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
     document.body.classList.remove('ar');
     document.documentElement.lang = 'en';
     history.replaceState(null, '', window.location.pathname);
-    document.getElementById('content').innerHTML = document.getElementById('content').dataset.english;
     updateLinks('en');
   }
 
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('lang') === 'ar') {
-    setArabic();
-  } else {
-    document.getElementById('content').dataset.english = document.getElementById('content').innerHTML;
-    updateLinks('en');
-  }
+  // Initialize based on ?lang=ar
+  (function() {
+    ensureBilingualStructure();
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('lang') === 'ar') {
+      setArabic();
+    } else {
+      updateLinks('en');
+    }
+  })();
 </script>
 
 </body>
