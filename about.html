@@ -133,6 +133,18 @@ body.ar .back::before {
 	content: "→ ";
 }
 
+.back span.ar {
+	display: none;
+}
+
+body.ar .back span.en {
+	display: none;
+}
+
+body.ar .back span.ar {
+	display: inline;
+}
+
 p {
 	color: #2b1b20;
 	text-shadow: none;
@@ -180,7 +192,8 @@ body.ar div.ar { display: block; }
 
 
 <a class="back" href="index.html">
-back home
+  <span class="en">back home</span>
+  <span class="ar">العودة للصفحة الرئيسية</span>
 </a>
 
 
