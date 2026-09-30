@@ -119,6 +119,39 @@ h2 {
 	margin-bottom: 0.6rem;
 }
 
+.entry-index {
+  margin: 28px 0 40px;
+  padding: 18px 22px;
+  border-top: 1px solid rgba(107, 63, 75, 0.35);
+  border-bottom: 1px solid rgba(107, 63, 75, 0.35);
+}
+
+.entry-index h2 {
+  margin-top: 0;
+}
+
+.entry-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.entry-index li::marker {
+  color: rgba(107, 63, 75, 0.4);
+}
+
+.entry-index a {
+  color: #6b3f4b;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.entry h2 {
+  scroll-margin-top: 20px;
+}
+
 .back {
 	text-decoration: none;
 	color: #6b3f4b;
@@ -220,6 +253,11 @@ body.ar div.ar { display: block; }
     المزيد قادم قريبًا ♡
   </p>
 </div>
+
+<nav class="entry-index" aria-label="Entry index">
+  <h2>Entries</h2>
+  <ul id="entry-index-list"></ul>
+</nav>
 
 
 <div class="entry">
@@ -651,6 +689,19 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
 
 
 <script>
+  const entryIndex = document.getElementById('entry-index-list');
+  document.querySelectorAll('.entry .en h2').forEach((heading, index) => {
+    const id = `entry-${index + 1}`;
+    heading.id = id;
+
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${id}`;
+    link.textContent = heading.textContent.trim();
+    item.appendChild(link);
+    entryIndex.appendChild(item);
+  });
+
   function updateLinks(lang) {
     document.querySelectorAll('a[href]').forEach((link) => {
       const href = link.getAttribute('href');
