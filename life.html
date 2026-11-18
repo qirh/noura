@@ -333,36 +333,16 @@ For now, I'm just grateful to be here and excited to see what the next two month
 
 
 <script>
-  const englishContent = document.getElementById("content").innerHTML;
+  const content = document.getElementById("content");
+  const englishContent = content.innerHTML;
 
-  function setArabic() {
-    document.body.classList.add("ar");
-    document.documentElement.lang = "ar";
-    document.getElementById("content").innerHTML = `
-      <a class="back" href="index.html">← العودة للرئيسية</a>
-      <h1>الحياة ♡</h1>
-      <div class="entry">
-        <p>هذه الصفحة مخصصة لمشاركة أفكاري وتجارب حياتي وملاحظاتي.</p>
-        <p>أحبّ مشاركة اللحظات الصغيرة التي تُضفي معنى على الحياة، من السفر إلى العمل والمشاريع.</p>
-      </div>
-    `;
-  }
-
-  function setEnglish() {
-    document.body.classList.remove("ar");
-    document.documentElement.lang = "en";
-    document.getElementById("content").innerHTML = englishContent;
-  }
   function updateLinks(lang) {
     document.querySelectorAll('a[href]').forEach((link) => {
       const href = link.getAttribute('href');
       if (!href || href.startsWith('http') || href.startsWith('#')) return;
       const url = new URL(href, window.location.href);
-      if (lang === 'ar') {
-        url.searchParams.set('lang', 'ar');
-      } else {
-        url.searchParams.delete('lang');
-      }
+      if (lang === 'ar') url.searchParams.set('lang', 'ar');
+      else url.searchParams.delete('lang');
       link.setAttribute('href', `${url.pathname}${url.search}`);
     });
   }
@@ -370,35 +350,44 @@ For now, I'm just grateful to be here and excited to see what the next two month
   function setArabic() {
     document.body.classList.add('ar');
     document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
     history.replaceState(null, '', '?lang=ar');
-    document.getElementById('content').innerHTML = `
-      <a class="back" href="index.html">← العودة للرئيسية</a>
+    content.innerHTML = `
+      <a class="back" href="index.html">→ العودة للرئيسية</a>
       <h1>الحياة ♡</h1>
       <div class="entry">
-        <p>هذه الصفحة مخصصة لمشاركة أفكاري وتجارب حياتي وملاحظاتي.</p>
-        <p>أحبّ مشاركة اللحظات الصغيرة التي تُضفي معنى على الحياة، من السفر إلى العمل والمشاريع.</p>
-      </div>
-    `;
+        <p>أفكار ومغامرات وملاحظات وكل شيء بين ذلك.</p>
+
+        <h2>١٣ يوليو ٢٠٢٦</h2>
+        <p>وصلت رسميًا إلى منتصف فترة التدريب الصيفي! لم أصدق كم تعلّمت وكم جرّبت أشياء ظننت سابقًا أنها بعيدة عنّي. أخذت أول درس لي في ركوب الأمواج، ورغم أنني لم أستطع الوقوف على اللوح، استمتعت بكل لحظة. بعد النّزالات المتكررة أصبحت هذه التجربة تشبه الإصرار على المحاولة، حتى لو لم أحقق الكمال.</p>
+        <p>كما أكملت ٣٠ غطسة، وأنهيت شهادة الغوص المتقدم، وذهبت في عدة غطسات ليلية. كما تجولت في الطبيعة وتعلّمت أنني أقدر أكثر مما كنت أظن.</p>
+
+        <h2>مؤسسة برانش للشعاب المرجانية</h2>
+        <p>أمضيت الصيف كمتدربة لدى مؤسسة برانش، وهي منظمة غير ربحية تعمل على استعادة وحماية الشعاب المرجانية في كوراساو. ينمون الشعاب في مشاتل تحت الماء ويعيدون زرعها في الشعاب الطبيعية، ويقدمون أيضًا البحث والتعليم وخدمة المجتمع.</p>
+        <p>العمل هنا ملهم جدًا؛ فقد واجهت أشخاصًا كريمين وكرّست وقتي لتعلّم الصيانة البيئية والغوص وترميم الشعاب. أتعلم كثيرًا من التحديات التي تواجه المحيطات، لكن وجود أشخاص يفعلون شيئًا حقيقيًا كل يوم يمنحني الأمل.</p>
+
+        <h2>كوراساو!!!</h2>
+        <p>وصلت إلى كوراساو لبدء فترة التدريب الصيفي، ولا أزال مدهوشة أنني هنا فعلًا. خلال الأشهر الماضية كنت أخطط لهذه الرحلة وأنتظرها، واليوم صار يوماً مليئًا بالغوص ومعدات البحر والمياه الزرقاء.</p>
+        <p>بدأت أيضًا شهادة الغوص المتقدم، وأصبحت على موعد لكل جديد: العمل على استعادة الشعاب، لقاء أشخاص رائعين، واستكشاف جزيرة جديدة. أنا ممتنة لهذه الفرصة ومتحمسة لما سيأتي خلال الشهرين القادمين.</p>
+      </div>`;
     updateLinks('ar');
   }
 
   function setEnglish() {
     document.body.classList.remove('ar');
     document.documentElement.lang = 'en';
+    document.documentElement.dir = 'ltr';
     history.replaceState(null, '', window.location.pathname);
-    document.getElementById('content').innerHTML = document.getElementById('content').dataset.english;
+    content.innerHTML = englishContent;
     updateLinks('en');
   }
 
   const params = new URLSearchParams(window.location.search);
-  if (params.get('lang') === 'ar') {
-    setArabic();
-  } else {
-    document.getElementById('content').dataset.english = document.getElementById('content').innerHTML;
-    updateLinks('en');
-  }
+  if (params.get('lang') === 'ar') setArabic();
+  else updateLinks('en');
 </script>
 
+<script src="cursor-magic.js"></script>
 </body>
 
 </html>
