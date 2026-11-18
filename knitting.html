@@ -672,54 +672,100 @@ function updateLinks(lang) {
 function setArabic() {
 
     document.body.classList.add("ar");
-
     document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
 
-
-    history.replaceState(
-        null,
-        "",
-        "?lang=ar"
-    );
-
+    history.replaceState(null, "", "?lang=ar");
 
     document.getElementById("content").innerHTML = `
-
-        <a class="back" href="index.html">
-            ← العودة للرئيسية
-        </a>
-
-        <h1>التريكو ♡</h1>
-
+        <a class="back" href="index.html">→ العودة للرئيسية</a>
+        <h1>التريكو الخاص بي</h1>
         <h2>
-            بدأتُ التريكو في عام ٢٠٢٥،
-            وأصبحت هواية ممتعة تُساعدني على الإبداع والصبر.
+            بدأت التريكو في عام ٢٠٢٥، وكانت هواية ممتعة وساعدتني على تنمية الإبداع والصبر.
+            أجرب أنماطًا وتقنيات مختلفة وأحاول أحيانًا تصميم مشاريعي بنفسي. ♡
         </h2>
 
-        <p>
-            أُجرب أنماطًا وتقنيات مختلفة،
-            وأحيانًا أُحاول تصميم بعض الأعمال بنفسي.
-        </p>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('not-started', this)">لم تبدأ بعد</button>
+            <button class="tab-btn" onclick="showTab('progress', this)">قيد التنفيذ</button>
+            <button class="tab-btn" onclick="showTab('finished', this)">منتهية</button>
+        </div>
 
+        <div id="not-started" class="tab-content active">
+            <h2>مشاريع لم أبدأها بعد ♡</h2>
+            <div class="project-card">
+                <h3>كنزة ن</h3>
+                <img src="images/sophie.jpg" alt="مشروع تريكو مستقبلي">
+                <div class="project-info">
+                    <p><strong>النمط:</strong> كنزة سندوك الكبلية</p>
+                    <p><strong>الخيط:</strong> حرير موهير من Knitting for Olive</p>
+                    <p><strong>الإبر:</strong> ٧ مم</p>
+                    <p><strong>ملاحظات:</strong> أتطلع بشوق لبدء هذا المشروع!</p>
+                </div>
+                <div class="status">لم يبدأ بعد</div>
+            </div>
+        </div>
+
+        <div id="progress" class="tab-content">
+            <h2>المشاريع الموجودة على الإبر حاليًا ♡</h2>
+            <div class="project-card">
+                <h3>بلوزة ن</h3>
+                <div class="project-info">
+                    <p><strong>النمط:</strong> بلوزة كلاود من PetiteKnit</p>
+                    <p><strong>الخيط:</strong> حرير موهير من Isager</p>
+                    <p><strong>الإبر:</strong> ٤ مم</p>
+                    <p><strong>بداية المشروع:</strong> أغسطس ٢٠٢٦</p>
+                    <p><strong>ملاحظات:</strong> عدّلت الأكمام لأشبهها بقصة واسعة.</p>
+                </div>
+                <div class="status">قيد التنفيذ</div>
+            </div>
+            <div class="project-card">
+                <h3>جاكيت بسحاب ن</h3>
+                <div class="project-info">
+                    <p><strong>النمط:</strong> ZIPPY ZAGGY ZIP UP من Ruby Zena</p>
+                    <p><strong>الإبر:</strong> ٤ مم</p>
+                    <p><strong>بداية المشروع:</strong> أغسطس ٢٠٢٦</p>
+                </div>
+                <div class="status">قيد التنفيذ</div>
+            </div>
+        </div>
+
+        <div id="finished" class="tab-content">
+            <h2>المشاريع المنتهية ♡</h2>
+            <div class="project-card">
+                <h3>حوض السمك الخاص بـ A</h3>
+                <div class="project-info">
+                    <p><strong>النمط:</strong> توب pebble</p>
+                    <p><strong>الإبر:</strong> ٢٫٥ مم</p>
+                    <p><strong>أُنجز في:</strong> ٢٦ يونيو ٢٠٢٦</p>
+                </div>
+                <div class="status">منتهي</div>
+            </div>
+        </div>
     `;
 
-
     updateLinks("ar");
-
 }
 
 
 
 function setEnglish() {
 
+    document.body.classList.remove("ar");
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
     location.href = "knitting.html";
 
 }
 
 
+
+const knittingParams = new URLSearchParams(window.location.search);
+if (knittingParams.get("lang") === "ar") setArabic();
+else updateLinks("en");
 </script>
 
-
+<script src="cursor-magic.js"></script>
 </body>
 
 </html>
