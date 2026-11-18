@@ -229,7 +229,7 @@ body.ar div.ar { display: block; }
   <span class="ar">العودة للصفحة الرئيسية</span>
 </a>
 
-
+7
 <div class="page-header en">
   <h1>Noura's Thoughts ♡</h1>
 
@@ -285,7 +285,7 @@ Maybe it's the spotlight on indie directors finally getting the attention they d
 
 But I'm enjoying it so much.
 
-I never want this to end.</p>
+I never want this to end.</p> 
 
     <h2>Christopher Nolan's The Odyssey</h2>
 
@@ -323,7 +323,7 @@ I wish more directors would either stay faithful to what made the original story
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>مسار السينما خلال هذا الجيل</h2><p>تراجع الحماس للسينما لفترة، ثم عاد بقوة هذا العام. أصبحت دور العرض مليئة، والأفلام المستقلة بجانب الإنتاجات الكبيرة أعادت للناس التجربة المشتركة.</p>
   </div>
 </div>
 
@@ -348,7 +348,7 @@ For now, I’m happy here, watching my fish and shrimp live their tiny lives. Bu
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>ملحمة الأوديسة لكرستوفر نولان</h2><p>رغم إعجابي ببعض أعمال نولان، شعرت أن هذا الفيلم ركز كثيرًا على الحرب والذنب لكنه أضعف شخصيات النساء وترك ذكاء أوديسيوس غير واضح.</p>
   </div>
 </div>
 
@@ -376,7 +376,7 @@ And honestly, it works. That’s the uncomfortable part. The company expanded in
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>أسماكي</h2><p>أقضي وقتًا طويلًا بمشاهدة أسماكي. حوضي المائي فيه موليز وروبيان، وأحبه حتى أصبح جزءًا كبيرًا من يومي. أحلم بحوض ملحي أكبر مليء بالشعاب والأسماك.</p>
   </div>
 </div>
 
@@ -403,7 +403,7 @@ I don’t have a bigger point than that. I just really love maps.
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>بلانك ستريت كوفي</h2><p>أحب القهوة وأحب تجربة مزيجات جديدة. بلانك ستريت أصبح مكانًا مريحًا للمقاهي الصغيرة والمشروبات المميزة.</p>
   </div>
 </div>
 
@@ -451,7 +451,7 @@ Especially if it means I was brave enough to pick one.
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>شجرة التين لسيلڤيا بلاث</h2><p>تصف بلاث شجرة التين كرمز لكل الخيارات الممكنة في الحياة. أفكر كثيرًا في الخوف من الاختيار والتردد أمام فرص كثيرة.</p>
   </div>
 </div>
 
@@ -543,7 +543,7 @@ There’s something about sitting with a piece of art like this, just noticing i
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>قبلة غوستاف كليمت</h2><p>ما جذبني في لوحات كليمت هو المزج بين الرقة والقوة، والزخرفة التفصيلية والوجوه الإنسانية.</p>
   </div>
 </div>
 
@@ -586,7 +586,7 @@ I think that’s why I keep coming back to Mary Shelley. Her life reminds me tha
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>ماري شيلي</h2><p>ماري شيلي كاتبة ملهمة، وكتابتها لفرانكنشتاين لا تزال تطرح أسئلة كبيرة عن المسؤولية والإنسانية والهوية.</p>
   </div>
 </div>
 
@@ -677,7 +677,7 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
 
   </div>
   <div class="ar" dir="rtl" lang="ar">
-    <!-- Arabic version goes here -->
+    <h2>تصور المرأة في الأساطير اليونانية</h2><p>أفكر مجددًا في تصوير النساء في الأساطير اليونانية، من باندورا وكاساندرا إلى ميدوسا وبرسيفون. تتكرر حكايات اللوم والتبسيط، رغم قوة وذكاء هذه الشخصيات.</p>
   </div>
 </div>
 
@@ -719,6 +719,7 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
   function setArabic() {
     document.body.classList.add('ar');
     document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
     history.replaceState(null, '', '?lang=ar');
     updateLinks('ar');
   }
@@ -726,6 +727,7 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
   function setEnglish() {
     document.body.classList.remove('ar');
     document.documentElement.lang = 'en';
+    document.documentElement.dir = 'ltr';
     history.replaceState(null, '', window.location.pathname);
     updateLinks('en');
   }
@@ -738,6 +740,7 @@ I don’t think I’m trying to rewrite mythology or rescue these women. I just 
   }
 </script>
 
+<script src="cursor-magic.js"></script>
 </body>
 
 </html>
