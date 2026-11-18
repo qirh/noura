@@ -243,6 +243,8 @@
     }
 
     function setEnglish() {
+      document.body.classList.remove("ar");
+      document.documentElement.lang = "en";
       history.replaceState(null, '', window.location.pathname);
       location.reload();
     }
@@ -255,7 +257,6 @@
   <div class="threads">
   
 
-
-
+<script src="cursor-magic.js"></script>
 </body>
 </html>
